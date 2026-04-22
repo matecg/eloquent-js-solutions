@@ -1,5 +1,5 @@
 /**
- * Solution(s) to Chapter 04 - Problem 3: Deep Comparison.
+ * Solution(s) to Chapter 04 - Problem 4: Deep Comparison.
 */
 
 /**
