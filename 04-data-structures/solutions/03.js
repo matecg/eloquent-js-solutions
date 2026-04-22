@@ -14,7 +14,7 @@ function arrayToList(arr) {
 }
 
 /**
- * Transforms a linked list object into an array of value.
+ * Transforms a linked list object into an array of value. Uses recursion.
  * @param {{value: any, rest:{} | null}} list - A list to transform
  * @returns {any[]}
  */
@@ -24,6 +24,19 @@ function listToArray(list) {
     }
     
     return [list.value].concat(listToArray(list.rest));
+}
+
+/**
+ * Loops over a list of nodes and convert it to an array of values.
+ * @param {{value: any, rest: {} | null}} list - A list of nodes
+ * @returns {any[]}
+ */
+function listToArray2(list) {
+    const output = [];
+    for (let node = list; node; node = node.rest) {
+        output.push(node.value);
+    }
+    return output;
 }
 
 /**
@@ -56,7 +69,7 @@ console.log(arrayToList([10, 20]));
 // → {value: 10, rest: {value: 20, rest: null}}
 console.log(arrayToList([10, 20, 30]));
 // → {value: 10, rest: {value: 20, rest: {value: 30, rest: null}}}
-console.log(listToArray(arrayToList([10, 20, 30])));
+console.log(listToArray2(arrayToList([10, 20, 30])));
 // → [10, 20, 30]
 console.log(prepend(10, prepend(20, null)));
 // → {value: 10, rest: {value: 20, rest: null}}
