@@ -8,6 +8,13 @@ export default class Group {
     }
 
     /**
+     * Return the current size of the group
+     */
+    get size() {
+        return this.values.length;
+    }
+
+    /**
      * Adds a new value to the Group, but only if it is unique.
      * @param {any} value - A value to add
      */
@@ -32,6 +39,17 @@ export default class Group {
      */
     has(value) {
         return this.values.some(x => x === value);
+    }
+
+    /**
+     * Try to retrieve a value based on their index, returning undefined 
+     * if the index is out of the group's range.
+     * @param {number} index - Index to retrieve value from
+     * @returns {any | undefined}
+     */
+    get(index) {
+        if (this.size() <= index) return undefined;
+        return this.values[index];
     }
 
     /**
