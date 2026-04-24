@@ -1,3 +1,5 @@
+import { getRandomElement, STARTING_PLACE } from "./helpers.js";
+
 export default class VillageState {
     constructor(place, parcels, graph) {
         this.place = place;
@@ -15,5 +17,19 @@ export default class VillageState {
             })
             .filter(p => p.place !== p.address);
         return new VillageState(to, parcels, this.village);
+    }
+
+    static createRandom( village, parcelCount = 5) {
+        const parcels = []
+        for (let i = 0; i < parcelCount; i++) {
+            const places = Object.keys(village)
+            const address = getRandomElement(places);
+            let place;
+            do {
+                place = getRandomElement(places);
+            } while (place === address);
+            parcels.push({address, place});
+        }
+        return new VillageState(STARTING_PLACE, parcels, village);
     }
 }
