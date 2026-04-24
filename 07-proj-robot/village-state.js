@@ -14,6 +14,6 @@ export default class VillageState {
                 return {place: to, address: p.address}
             })
             .filter(p => p.place !== p.address);
-        return new VillageState(this.place, parcels, this.village);
+        return new VillageState(to, parcels, this.village);
     }
 }
