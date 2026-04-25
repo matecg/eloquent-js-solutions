@@ -47,15 +47,16 @@ export function getRandomElement(array) {
 
 /**
  * Runs a robot function logic in a loop until all parcels have been delivered.
+ * It returns the total number of steps used by the robot to complete the task.
  * @param {VillageState} state - Current village state
  * @param {(state: VillageState, memory: string[]) => {direction: string, memory: string[]}} runRobot - A function that executes the robots algorithm
  * @param {string[]} memory - Memory of places the robot already visited
+ * @returns {number}
  */
 export function deliverParcels(state, runRobot, memory) {
     for (let step = 0 ;; step++) {
         if (!state.parcels.length) {
-            console.log(`Completed in ${step} steps`);
-            break;
+            return step;
         }
         
         const action = runRobot(state, memory);
