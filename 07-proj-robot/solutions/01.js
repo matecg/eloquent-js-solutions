@@ -15,7 +15,7 @@ import VillageState from "../village-state.js";
  * @param {string[]} memory2 - Robot 2 memory
  * @returns {{robot1: number, robot2: number}}
  */
-function compareRobots(robot1, memory1, robot2, memory2) {
+export function compareRobots(robot1, memory1, robot2, memory2) {
     const testCount = 100;
     const village = buildGraph(ROADS);
     let averages = {robot1: 0, robot2: 0}
