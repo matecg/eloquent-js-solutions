@@ -10,7 +10,7 @@ export default function evaluate(expression, scope) {
             throw new ReferenceError(`Undefined biding: ${expression.name}`);
         }
     } else if (expression.type == "apply") {
-        let {operator, args} = expression;
+        let { operator, args } = expression;
         if (operator.type == "word" && operator.name in specialForms) {
             return specialForms[operator.name](expression.args, scope);
         } else {
@@ -46,7 +46,7 @@ specialForms.while = (args, scope) => {
 
 specialForms.do = (args, scope) => {
     let output = false;
-    for (const arg in args) {
+    for (const arg of args) {
         output = evaluate(arg, scope);
     }
     return output
@@ -56,6 +56,7 @@ specialForms.define = (args, scope) => {
     if (args.length !== 2) {
         throw new SyntaxError("Wrong number of arguments to define");
     }
-    scope[args[0].name] = evaluate(args[1], scope);
-    return scope[args[0]];
+    let value = evaluate(args[1], scope);
+    scope[args[0].name] = value;
+    return value;
 }
