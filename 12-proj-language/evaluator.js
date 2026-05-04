@@ -2,10 +2,13 @@ import generateGlobalScope from "./globalScope.js";
 import parse from "./parser.js";
 
 const specialForms = Object.create(null);
-const topScope = generateGlobalScope();
 
-export default function run(program) {
-    return evaluate(parse(program), Object.create(topScope));
+export default function buildRunFunction(globalScope) {
+    if (!globalScope) globalScope = generateGlobalScope();
+
+    return function(program){
+        return evaluate(parse(program), Object.create(globalScope));
+    } 
 }
 
 function evaluate(expression, scope) {

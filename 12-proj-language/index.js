@@ -1,5 +1,6 @@
-import run from "./evaluator.js";
+import buildRunFunction from "./evaluator.js";
 
+const run = buildRunFunction();
 
 run(`
 do(define(total, 0),
