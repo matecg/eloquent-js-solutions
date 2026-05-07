@@ -1,7 +1,7 @@
 import generateGlobalScope from "./globalScope.js";
 import parse from "./parser.js";
 
-const specialForms = Object.create(null);
+export const specialForms = Object.create(null);
 
 export default function buildRunFunction(globalScope) {
     if (!globalScope) globalScope = generateGlobalScope();
@@ -11,7 +11,7 @@ export default function buildRunFunction(globalScope) {
     } 
 }
 
-function evaluate(expression, scope) {
+export function evaluate(expression, scope) {
     if (expression.type == "value") {
         return expression.value;
     } else if (expression.type == "word") {
