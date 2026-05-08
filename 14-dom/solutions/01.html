@@ -1,0 +1,59 @@
+<!-- Solution(s) for Chapter 14 - Problem 1: Build a Table -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build a Table</title>
+</head>
+
+<body>
+  <h1>Mountains</h1>
+
+  <div id="mountains"></div>
+
+  <script>
+    const MOUNTAINS = [
+      { name: "Kilimanjaro", height: 5895, place: "Tanzania" },
+      { name: "Everest", height: 8848, place: "Nepal" },
+      { name: "Mount Fuji", height: 3776, place: "Japan" },
+      { name: "Vaalserberg", height: 323, place: "Netherlands" },
+      { name: "Denali", height: 6168, place: "United States" },
+      { name: "Popocatepetl", height: 5465, place: "Mexico" },
+      { name: "Mont Blanc", height: 4808, place: "Italy/France" }
+    ];
+
+    createTable(MOUNTAINS)
+
+    function createTable(data) {
+      const container = document.querySelector("#mountains");
+      const table = document.createElement("table");
+
+      const headersRow = document.createElement("tr");
+      for (const header of Object.keys(data[0])) {
+        const headerTag = document.createElement("th");
+        headerTag.textContent = header;
+        headersRow.appendChild(headerTag);
+      }
+      table.appendChild(headersRow);
+
+      for (const entry of data) {
+        const newRow = document.createElement("tr");
+        for (const key in entry) {
+          const dataCell = document.createElement("td");
+          dataCell.textContent = entry[key];
+          if (typeof entry[key] === "number") {
+            dataCell.style.textAlign = "right";
+          }
+          newRow.appendChild(dataCell);
+        }
+        table.appendChild(newRow);
+      }
+
+      container.appendChild(table);
+    }
+  </script>
+</body>
+
+</html>
