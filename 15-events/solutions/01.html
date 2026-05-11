@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balloon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      height: 100vh;
+      font-size: 16px;
+      background-color: rgb(239, 239, 239);
+    }
+    p {
+      text-align: center;
+    }
+    .instructions {
+      font-size: 20px;
+      font-style: italic;
+      color: gray;
+    }
+    .balloon {
+      display: grid;
+      align-content: center;
+      height: 210px;
+    }
+  </style>
+</head>
+
+<body>
+  <p class="balloon">🎈</p>
+  <p class="instructions">Press Up Arrow to inflate the balloon and Down Arrow to deflate it.</p>
+
+  <script>
+    const balloon = document.querySelector(".balloon");
+    let fontSize = 16;
+    const EXPLODE_AT = 155;
+
+    document.querySelector("body")
+      .addEventListener("keydown", inflate);
+
+    function inflate(e) {
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        fontSize *= 1.1;
+      }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        fontSize /= 1.1;
+      }
+      balloon.style.fontSize = `${fontSize}px`;
+
+      if (fontSize >= EXPLODE_AT) {
+        balloon.textContent = "💥";
+        document.querySelector("body")
+          .removeEventListener("keydown", inflate);
+          const instructions = document.querySelector(".instructions");
+          instructions.textContent = "BOOOOOOOOOM! 🥲";
+          instructions.style.fontStyle = "normal";
+      }
+    }
+  </script>
+</body>
+
+</html>
