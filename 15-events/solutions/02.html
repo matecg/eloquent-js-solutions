@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Trail</title>
+  <style>
+    .trail {
+      /* className for the trail elements */
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      aspect-ratio: 1;
+      border-radius: 3px;
+      background: teal;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    body {
+      height: 300px;
+      background-color: #121212;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <script>
+    const body = document.querySelector("body");
+    const trailElements = [];
+    for (let i = 0; i < 51; i++) {
+      const trail = document.createElement("div");
+      trail.classList.add("trail", "hide");
+      trailElements.push(trail);
+      body.appendChild(trail);
+    }
+
+    let next = 0;
+    let debounceTimer, hideTimeout;
+    body.addEventListener("mousemove", (e) => {
+      const { clientX, clientY } = e;
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        const last = next;
+        trailElements[next].classList.remove("hide");
+        trailElements[next].style.top = clientY - 3 + "px";
+        trailElements[next].style.left = clientX - 3 + "px";
+        next = (next + 1) % trailElements.length;
+        hideTimeout = setTimeout(() => {
+          trailElements[last].classList.add("hide");
+        }, 100);
+      }, 1)
+    })
+  </script>
+</body>
+
+</html>
