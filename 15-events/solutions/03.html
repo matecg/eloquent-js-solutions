@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabs</title>
+  <style>
+    :root {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      cursor: pointer;
+      padding: 5px;
+      border: none;
+      background-color: gainsboro;
+      min-width: 100px;
+      min-height: 40px;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+
+    .active {
+      background-color: rgb(255, 240, 217);
+      color: rgb(61, 44, 18);
+      font-weight: 600;
+      display: block;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .tab-panel {
+      height: 100vh;
+      display: block;
+    }
+
+    .controls-container {
+      display: flex;
+      gap: 5px;
+      padding: 20px;
+      padding-bottom: 0;
+      background-color: rgb(112, 90, 57);
+    }
+    
+    .tab {
+      height: 100%;
+      background-color: rgb(255, 240, 217);
+    }
+  </style>
+</head>
+
+<body>
+  <tab-panel class="tab-panel">
+    <div data-tabname="one" class="hidden tab">Tab one</div>
+    <div data-tabname="two" class="hidden tab">Tab two</div>
+    <div data-tabname="three" class="hidden tab">Tab three</div>
+  </tab-panel>
+  <script>
+    function asTabs(node) {
+      const controlContainer = document.createElement("div");
+      node.appendChild(controlContainer);
+      controlContainer.classList.add("controls-container");
+      let active = null;
+      const tabs = Array.from(node.children)
+        .filter(child => child.dataset["tabname"]);
+      console.log(tabs);
+
+      for (const tab of tabs) {
+        const next = tab.dataset["tabname"]
+        if (!next) continue;
+        
+        const tabBtn = document.createElement("button");
+        if (active === null) {
+          active = tab;
+          tab.classList.remove("hidden");
+          tabBtn.classList.add("active");
+        }
+
+        tabBtn.textContent = next;
+        tabBtn.addEventListener("click", (e) => {
+          controlContainer.querySelector(".active")
+          .classList.remove("active");
+          
+          active.classList.add("hidden");
+          e.target.classList.add("active");
+          tab.classList.remove("hidden");
+          active = tab;
+        });
+        controlContainer.appendChild(tabBtn);
+        node.appendChild(tab);
+      }
+      
+    }
+    asTabs(document.querySelector("tab-panel"));
+  </script>
+</body>
+
+</html>
