@@ -1,3 +1,5 @@
+const SCALE = 20;
+
 /**
  * Dynamically creates a new HTMLElement from a given tag.
  * @param {string} tag - A HTML element tag
@@ -16,8 +18,6 @@ export function createDOMElement(tag, attrs, ...children) {
     return element;
 }
 
-const SCALE = 20;
-
 /**
  * Draws the HTML table element representing the current level.
  * @param {import ("../engine/level.js").default} level - A Level instance
@@ -31,4 +31,20 @@ export function drawGrid(level) {
             ...row.map(type => createDOMElement("td", { class: type }))
         )
     ));
+}
+
+/**
+ * Draws all actors into a div.
+ * @param {any[]} actors - An array of actor instances (coins, player or lava)
+ * @returns {HTMLDivElement}
+ */
+export function drawActors(actors) {
+    return createDOMElement("div", {}, ...actors.map(actor => {
+        const rect = createDOMElement("div", {class: `actor ${actor.type}`});
+        rect.style.width = `${actor.size.x * SCALE}px`;
+        rect.style.height = `${actor.size.y * SCALE}px`;
+        rect.style.left = `${actor.pos.x * SCALE}px`;
+        rect.style.top = `${actor.pos.y * SCALE}px`;
+        return rect;
+    }));
 }
