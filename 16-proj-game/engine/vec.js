@@ -23,7 +23,7 @@ export default class Vec {
      * Add two vectors together.
      * @param {Vec} vec - A vector to add
      */
-    plus(vec) {
+    sum(vec) {
         return new Vec(this.x + vec.x, this.y + vec.y);
     }
 

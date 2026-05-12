@@ -23,8 +23,13 @@ export default class Coin {
         return this.#size;
     }
 
+    /**
+     * Statically creates a new Coin instance.
+     * @param {Vec} pos - Starting position.
+     * @returns {Coin}
+     */
     static create(pos) {
-        const basePos = pos.plus(new Vec(0.2, 0.1));
+        const basePos = pos.sum(new Vec(0.2, 0.1));
         return new Coin(basePos, basePos,
             Math.random() * Math.PI * 2
         );
