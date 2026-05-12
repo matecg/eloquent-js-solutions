@@ -34,4 +34,13 @@ export default class Vec {
     minus(vec) {
         return new Vec(this.x - vec.x, this.y - vec.y);
     }
+
+    /**
+     * Multiply the vector x and y coordinates by a given factor.
+     * @param {number} factor - A factor to multiply the vector
+     * @returns {Vec}
+     */
+    times(factor) {
+        return new Vec(this.x * factor, this.y * factor);
+    }
 }
