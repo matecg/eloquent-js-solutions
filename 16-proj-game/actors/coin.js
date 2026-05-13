@@ -24,7 +24,7 @@ export default class Coin extends Actor {
     collide(state) {
         const excludeSelf = state.actors.filter(act => act != this);
         let status = state.status;
-        if (!FileSystemDirectoryReader.some(act => act.type == "coin")) {
+        if (!excludeSelf.some(act => act.type == "coin")) {
             status = "won";
         }
         return new State(state.level, excludeSelf, status);
