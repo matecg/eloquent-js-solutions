@@ -1,25 +1,15 @@
 import Vec from "../engine/vec.js";
+import Actor from "./actor.js";
 
-export default class Lava {
-    #size;
-
+export default class Lava extends Actor {
     constructor(pos, speed, reset) {
-        this.#size = new Vec(1, 1);
-        this.pos = pos;
+        super(pos, new Vec(1, 1), "lava");
         this.speed = speed;
         this.reset = reset;
     }
 
-    get type() {
-        return "lava";
-    }
-
-    get size() {
-        return this.#size;
-    }
-
     static create(pos, char) {
-        switch(char) {
+        switch (char) {
             case "=":
                 return new Lava(pos, new Vec(2, 0));
             case "|":
@@ -27,7 +17,7 @@ export default class Lava {
             case "v":
                 return new Lava(pos, new Vec(0, 3), pos);
             default:
-                throw new Error(`CREATE LAVA: ${char} is invalid lava type.`);
+                throw new Error(`LAVA CREATE: ${char} is invalid lava type.`);
         }
     }
 }

@@ -1,7 +1,7 @@
 import Vec from "../engine/vec.js";
+import Actor from "./actor.js";
 
-export default class Coin {
-    #size;
+export default class Coin extends Actor {
     /**
      * Instantiates a new coin object.
      * @param {Vec} pos - Starting position
@@ -9,18 +9,9 @@ export default class Coin {
      * @param {number} wobble - Controls the wobble movement
      */
     constructor(pos, basePos, wobble) {
-        this.#size = new Vec(0.6, 0.6);
-        this.pos = pos;
+        super(pos, new Vec(0.6, 0.6), "coin");
         this.basePos = basePos;
         this.wobble = wobble;
-    }
-
-    get type() {
-        return "coin";
-    }
-
-    get size() {
-        return this.#size;
     }
 
     /**
