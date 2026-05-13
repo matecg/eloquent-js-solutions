@@ -9,20 +9,3 @@ export function overlap(actor1, actor2) {
         actor1.pos.y + actor1.size.y > actor2.y &&
         actor1.pos.y < actor2.pos.y + actor2.size.y;
 }
-
-/**
- * Build a tracking object for keydown and keyup events.
- * @param {string[]} keys - Array of key names
- */
-export function trackKeys(keys) {
-    const tracker = Object.create(null);
-    function track(event) {
-        if (keys.includes(event.key)) {
-            tracker[event.key] = event.type == "keydown";
-            event.preventDefault();
-        }
-    }
-    window.addEventListener("keydown", track);
-    window.addEventListener("keyup", track);
-    return tracker;
-}

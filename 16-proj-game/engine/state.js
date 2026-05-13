@@ -1,3 +1,5 @@
+import { overlap } from "./helpers.js";
+
 /**
  * Manages the current game loop state.
  */
