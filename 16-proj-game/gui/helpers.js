@@ -1,4 +1,4 @@
-const SCALE = 20;
+export const SCALE = 20;
 
 /**
  * Dynamically creates a new HTMLElement from a given tag.
