@@ -1,18 +1,22 @@
 export default class Actor {
+    /**
+     * @param {import("../engine/vec.js").default} pos - Starting position
+     * @param {import("../engine/vec.js").default} size - Actor size vector
+     * @param {string} type - Actor type string
+     */
     constructor(pos, size, type) {
         this.pos = pos;
         this.size = size;
         this.type = type;
     }
 
-    /**
-     * Update the actor's position.
-     * @param {number} time - Elapsed time
-     * @param {import("../engine/state.js").default} state - Current game state
-     * @param {string[]} keys - List of keyboard keys held down
-     */
+    
     update(time, state, keys) {
         throw new Error("ACTOR UPDATE: must be defined by the child class.");
+    }
+
+    collide(state) {
+        throw new Error("ACTOR COLLIDE: must be defined by the child class.");
     }
 
     /**
