@@ -1,6 +1,4 @@
-import Coin from "../actors/coin.js";
-import Lava from "../actors/lava.js";
-import Player from "../actors/player.js";
+import { levelCharacters } from "./helpers.js";
 import Vec from "./vec.js";
 
 /**
@@ -59,13 +57,3 @@ export default class Level {
     }
 }
 
-const levelCharacters = {
-    ".": "empty",
-    "#": "wall",
-    "+": "lava",
-    "@": Player,
-    "o": Coin,
-    "=": Lava,
-    "|": Lava,
-    "v": Lava
-};
