@@ -43,4 +43,11 @@ export default class Vec {
     times(factor) {
         return new Vec(this.x * factor, this.y * factor);
     }
+
+    
+    normalize() {
+        const x = (this.x / this.length)
+        const y = (this.y / this.length)
+        return new Vec(x, y);
+    }
 }
