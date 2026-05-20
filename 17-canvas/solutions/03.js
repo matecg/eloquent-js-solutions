@@ -27,17 +27,14 @@ function updateAnimation(step) {
 
     let nextStepX = step * velocity.x * SPEED;
     let nextStepY = step * velocity.y * SPEED;
-    let collided = false;
 
     if (isCollidingHorizontally(nextStepX)) {
         velocity.x *= -1;
         velocity.y += (Math.random() - 0.5) * 1.5;
-        collided = true;
     }
     if (isCollidingVertically(nextStepY)) {
         velocity.y *= -1;
         velocity.x += (Math.random() - 0.5) * 1.5;
-        collided = true;
     }
 
     position.x += step * SPEED * velocity.x;
