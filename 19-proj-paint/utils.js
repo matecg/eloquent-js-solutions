@@ -1,0 +1,30 @@
+export function elt(type, props, ...children) {
+    const dom = document.createElement(type);
+    if (props) Object.assign(dom, props);
+
+    for (const child of children) {
+        const component = typeof child != "string"
+            ? child : document.createTextNode(child);
+        dom.appendChild(component);
+    }
+    return dom;
+}
+
+/**
+ * Draws pixels into the provided canvas
+ * @param {import("./picture.js").default} picture - Picture instance 
+ * @param {*} canvas - DOM element that will receive the drawing 
+ * @param {number} scale - Value to adjust the size of the drawing 
+ */
+export function drawPicture(picture, canvas, scale) {
+    canvas.width = picture.width * scale;
+    canvas.height = picture.height * scale;
+    const cx = canvas.getContext("2d");
+
+    for (let y = 0; y < picture.height; y++) {
+        for (let x = 0; x < picture.width; x++){
+            cx.fillStyle = picture.pixel(x, y);
+            cx.fillRect(x * scale, y * scale, scale, scale);
+        }
+    }
+}
