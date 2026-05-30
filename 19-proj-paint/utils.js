@@ -1,3 +1,5 @@
+import { SCALE } from "./constants.js";
+
 export function elt(type, props, ...children) {
     const dom = document.createElement(type);
     if (props) Object.assign(dom, props);
@@ -26,5 +28,13 @@ export function drawPicture(picture, canvas, scale) {
             cx.fillStyle = picture.pixel(x, y);
             cx.fillRect(x * scale, y * scale, scale, scale);
         }
+    }
+}
+
+export function pointerPosition(pos, domNode) {
+    const rect = domNode.getBoundingClientRect();
+    return {
+        x: Math.floor((pos.clientX - rect.left) / SCALE),
+        y: Math.floor((pos.clientY - rect.top) / SCALE)
     }
 }

@@ -1,5 +1,5 @@
 import { SCALE } from "./constants.js";
-import { drawPicture, elt } from "./utils.js";
+import { drawPicture, elt, pointerPosition } from "./utils.js";
 
 export default class PictureCanvas {
     constructor(picture, pointerDown) {
@@ -16,4 +16,24 @@ export default class PictureCanvas {
         this.picture = picture;
         drawPicture(this.picture, this.dom, SCALE);
     }
+
+    mouse(downEvent, onDown) {
+        if (downEvent.button != 0) return;
+
+        let pos = pointerPosition(downEvent, this.dom);
+        const onMove = onDown(pos);
+        if (!onMove) return;
+
+        const move = moveEvent => {
+            if (moveEvent.buttons == 0) {
+                this.dom.removeEventListener("mousemove", move);
+            } else {
+                const newPos = pointerPosition(moveEvent, this.dom);
+                if (newPos.x == pos.x && newPos.y == pos.y) return;
+                pos = newPos;
+                onMove(newPos);
+            }
+        };
+        this.dom.addEventListener("mousemove", move);
+    } 
 }
