@@ -36,4 +36,27 @@ export default class PictureCanvas {
         };
         this.dom.addEventListener("mousemove", move);
     } 
+
+    touch(startEvent, onDown) {
+        let pos = pointerPosition(startEvent.touches[0], this.dom);
+        const onMove = onDown(pos);
+        startEvent.preventDefault();
+
+        if (!onMove) return;
+        const move = moveEvent => {
+            const newPos = pointerPosition(moveEvent.touches[0],
+                this.dom
+            );
+            if (newPos.x == pos.x && newPos.y == pos.y) return;
+            pos = newPos;
+            onMove(newPos);
+        };
+        const end = () => {
+            this.dom.removeEventListener("touchmove", move);
+            this.dom.removeEventListener("touchend", end);
+        };
+        
+        this.dom.addEventListener("touchmove", move);
+        this.dom.addEventListener("touchend", end);
+    }
 }
