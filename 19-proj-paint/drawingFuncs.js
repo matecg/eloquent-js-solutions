@@ -1,7 +1,7 @@
 export function draw(pos, state, dispatch) {
     function drawPixel({ x, y }, state) {
         const drawn = { x, y, color: state.color };
-        dispatch({ picture: state.picture.draw([draw]) });
+        dispatch({ picture: state.picture.draw([drawn]) });
     }
     drawPixel(pos, state);
     return drawPixel;
