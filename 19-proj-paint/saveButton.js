@@ -1,4 +1,4 @@
-import { drawPicture } from "./utils.js";
+import { drawPicture, elt } from "./utils.js";
 
 export default class SaveButton {
     constructor(state) {
